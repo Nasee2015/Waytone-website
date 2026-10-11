@@ -638,18 +638,119 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: var(--shadow-subtle);
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 22px;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-side-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--pista), var(--pista-dark));
+}
+
+.founder-card-top {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.founder-avatar-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.founder-avatar-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 10%;
+  border: 3px solid var(--pista);
+  box-shadow: 0 6px 18px rgba(161, 200, 148, 0.4);
+  transition: transform var(--transition);
+}
+
+.founder-avatar-wrap:hover .founder-avatar-img {
+  transform: scale(1.04);
+}
+
+.founder-status-badge {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  background: var(--pista);
+  color: var(--dark);
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+  border: 2px solid #FFFFFF;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.founder-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.founder-kicker {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--pista-deep);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 3px;
+}
+
+.founder-name {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--dark);
+  line-height: 1.2;
+  margin-bottom: 3px;
+}
+
+.founder-role {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  line-height: 1.4;
 }
 
 .about-side-box blockquote {
-  font-size: 1.15rem;
+  font-size: 1.12rem;
   font-style: italic;
   color: var(--dark);
   line-height: 1.7;
   border-left: 3px solid var(--pista);
   padding-left: 18px;
+  margin: 0;
 }
 
+.founder-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.founder-tag {
+  background: var(--pista-light);
+  color: var(--pista-deep);
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-pista);
+}
+
+/* Fallback legacy classes */
 .about-author {
   display: flex;
   align-items: center;
