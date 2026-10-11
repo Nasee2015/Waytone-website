@@ -278,9 +278,42 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .brand-logo {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 12px;
+  text-decoration: none;
+  transition: transform var(--transition);
+}
+
+.site-logo-img {
+  height: 52px;
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+  display: block;
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+.brand-logo:hover .site-logo-img {
+  transform: scale(1.02);
+}
+
+.footer-logo-link {
+  display: inline-block;
+  text-decoration: none;
+  margin-bottom: 14px;
+}
+
+.footer-logo-img {
+  height: 48px;
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+  display: block;
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+.footer-logo-link:hover .footer-logo-img {
+  transform: scale(1.02);
 }
 
 .logo-symbol {
@@ -1406,8 +1439,22 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 768px) {
-  .nav-menu, .nav-actions .btn {
+  .site-logo-img {
+    height: 40px;
+    max-width: 170px;
+  }
+  .nav-menu {
     display: none;
+  }
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .nav-actions .btn {
+    display: inline-flex;
+    padding: 7px 14px;
+    font-size: 0.82rem;
   }
   .hamburger-btn {
     display: block;
@@ -1426,5 +1473,16 @@ h1, h2, h3, h4, h5, h6 {
   }
   .footer-top-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-logo-img {
+    height: 34px;
+    max-width: 145px;
+  }
+  .nav-actions .btn {
+    padding: 6px 11px;
+    font-size: 0.76rem;
   }
 }
