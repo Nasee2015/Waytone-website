@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initReviewCarousel();
   initCourseSelectButtons();
   initDemoForm();
+  initSchoolInquiryForm();
 });
 
 /* ==========================================================================
@@ -18,13 +19,20 @@ document.addEventListener('DOMContentLoaded', () => {
 function initMobileNavigation() {
   const hamburgerBtn = document.getElementById('hamburger-btn');
   const mobileDrawer = document.getElementById('mobile-drawer');
-  const mobileLinks = document.querySelectorAll('.mobile-link');
+  const closeBtn = document.getElementById('drawer-close-btn');
+  const mobileLinks = document.querySelectorAll('.mobile-link, .mobile-nav-link');
 
   if (!hamburgerBtn || !mobileDrawer) return;
 
   hamburgerBtn.addEventListener('click', () => {
     mobileDrawer.classList.toggle('open');
   });
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      mobileDrawer.classList.remove('open');
+    });
+  }
 
   mobileLinks.forEach(link => {
     link.addEventListener('click', () => {
@@ -233,6 +241,54 @@ function initDemoForm() {
     successNotice.style.display = 'block';
 
     showToast(`Thank you, ${name}! Your free demo request has been received.`);
+  });
+}
+
+/* ==========================================================================
+   6. SCHOOL ORIENTATION INQUIRY FORM
+   ========================================================================== */
+function initSchoolInquiryForm() {
+  const form = document.getElementById('school-inquiry-form');
+  const successNotice = document.getElementById('school-success');
+
+  if (!form || !successNotice) return;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const schoolName = document.getElementById('school-name')?.value.trim();
+    const schoolPlace = document.getElementById('school-place')?.value.trim();
+    const contactPerson = document.getElementById('contact-person')?.value.trim();
+    const schoolPhone = document.getElementById('school-phone')?.value.trim();
+    const studentCount = document.getElementById('student-count')?.value;
+    const programFormat = document.getElementById('program-format')?.value;
+    const targetGrades = document.getElementById('target-grades')?.value.trim();
+
+    if (!schoolName || !schoolPlace || !contactPerson || !schoolPhone || !studentCount || !programFormat) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+
+    // Save school inquiry into localStorage for persistence
+    try {
+      const inquiries = JSON.parse(localStorage.getItem('waytone_school_inquiries') || '[]');
+      inquiries.push({
+        schoolName,
+        schoolPlace,
+        contactPerson,
+        schoolPhone,
+        studentCount,
+        programFormat,
+        targetGrades,
+        submittedAt: new Date().toISOString()
+      });
+      localStorage.setItem('waytone_school_inquiries', JSON.stringify(inquiries));
+    } catch (err) {
+      console.warn('Could not save school inquiry locally:', err);
+    }
+
+    form.style.display = 'none';
+    successNotice.style.display = 'block';
   });
 }
 
